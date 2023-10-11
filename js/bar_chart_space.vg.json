@@ -1,0 +1,14 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 300,
+  "height": 300,
+  "data": {"url": "https://raw.githubusercontent.com/sthe0012/FIT3179Assignment2/main/data/2021_PerCapitaCO2_flat.csv"},
+  "transform": [
+    {"filter": "datum.Country === 'United States of America' || datum.Country === 'China' || datum.Country === 'India'"}
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "Country", "sort": "-y"},
+    "y": {"field": "Total", "aggregate": "max", "title": "Total CO2 Emissions"}
+  }
+}

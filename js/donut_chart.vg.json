@@ -1,0 +1,41 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "CO2 Emissions By Fuel Type",
+  "data": {
+    "url": "https://raw.githubusercontent.com/sthe0012/FIT3179Assignment2/main/data/CO2FuelType.csv"
+  },
+  "transform": [{
+    "window": [{
+        "op": "sum",
+        "field": "Total",
+        "as": "TotalTotal"
+    }],
+    "frame": [null, null]
+  },
+  {
+    "calculate": "datum.Total/datum.TotalTotal",
+    "as": "PercentOfTotal"
+  }],
+  "mark": {"type": "arc", "innerRadius": 50, "tooltip": true, "stroke": "grey"},
+  "encoding": {
+    "theta": {
+      "field": "Total",
+      "type": "quantitative",
+      "stack": "normalize"
+    },
+    "color": {
+      "field": "Emission Type", 
+      "type": "nominal",
+      "title": "CO2 Emissions by Type:"},
+    "tooltip": [
+        {"field": "Total", "type": "quantitative"},
+        {"field": "Emission Type", "type": "nominal"},
+        {
+          "field": "PercentOfTotal",
+          "type": "quantitative",
+          "title": "Percentage",
+          "format": ".1%"
+        }
+      ]
+  }
+}
